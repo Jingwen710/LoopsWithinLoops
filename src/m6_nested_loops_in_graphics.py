@@ -4,14 +4,14 @@ in the context of TWO-DIMENSIONAL GRAPHICS.
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
          their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+"""  # Done: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
 
 def main():
     """ Calls the other functions to demonstrate them. """
-    run_test_draw_L()
+    # run_test_draw_L()
     run_test_draw_wall_on_right()
 
 
@@ -80,9 +80,38 @@ def draw_L(window, circle, r, c):
     and m and n are small, positive integers.
     """
     # ------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # Done: 2. Implement and test this function.
     #     The testing code is already written for you (above).
     # ------------------------------------------------------------------
+    original_x = circle.center.x
+    original_y = circle.center.y
+    radius = circle.radius
+
+    x = original_x
+    y = original_y
+    for i in range(r):
+        for j in range(3):
+            new_circle = rg.Circle(rg.Point(x, y), radius)
+            new_circle.fill_color = circle.fill_color
+            new_circle.attach_to(window)
+            window.render(0.1)
+
+            x = x + (2 * radius)
+
+        y = y + 2 * radius
+        x = original_x
+
+    for i in range(3):
+        for j in range(c + 3):
+            new_circle = rg.Circle(rg.Point(x, y), radius)
+            new_circle.fill_color = circle.fill_color
+            new_circle.attach_to(window)
+            window.render(0.1)
+
+            x = x + (2 * radius)
+
+        y = y + 2 * radius
+        x = original_x
 
 
 def run_test_draw_wall_on_right():
@@ -121,9 +150,31 @@ def draw_wall_on_right(rectangle, n, window):
     and n is a small, positive integer.
     """
     # ------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # Done: 3. Implement and test this function.
     #     The testing code is already written for you (above).
     # ------------------------------------------------------------------
+    start_x = rectangle.get_upper_left_corner().x
+    start_y = rectangle.get_upper_left_corner().y
+    end_x = rectangle.get_lower_right_corner().x
+    end_y = rectangle.get_lower_right_corner().y
+
+    x1 = start_x
+    y1 = start_y
+    x2 = end_x
+    y2 = end_y
+    for j in range(n):
+        for _ in range(j + 1):
+            new_rec = rg.Rectangle(rg.Point(x1, y1), rg.Point(x2, y2))
+            new_rec.attach_to(window)
+            window.render(0.1)
+
+            x1 -= rectangle.get_width()
+            x2 -= rectangle.get_width()
+
+        y1 += rectangle.get_height()
+        y2 += rectangle.get_height()
+        x1 = start_x
+        x2 = end_x
 
 
 # ----------------------------------------------------------------------
